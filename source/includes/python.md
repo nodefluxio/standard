@@ -4,18 +4,51 @@
 
 ### Dependency Management
 
-> Inside the requirements.txt
+> Inside the Pipfile. All of these are generated automatically by `pipenv`.
 
-```shell
-tensorflow-gpu==1.4.1
--e git+https://bitbucket.org/verysmartdonkey/tf-object-detector#egg=tfdetector
+```ini
+[[source]]
+
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+
+fire = "*"
+logger = {git = "https://bitbucket.org/verysmartdonkey/nodeflux-logger-python"}
+
+[dev-packages]
+
+pylint = "*"
+pytest = "*"
+
+[requires]
+
+python_version = "3.6"
 ```
 
 > This way we can install all dependencies with
 
 ```shell
-pip install -r requirements.txt
+$ pipenv install
 ```
+
+> which read or generate a `Pipfile.lock` to make sure the installation is deterministic.
+
+The most common dependency management for python is the use of `requirements.txt` file, which can be installed with `pip install -r requirements.txt`. Unfortunately, this simple solution is prone to many problems. Installation with `requirements.txt` is non deterministic. Depending on the content of the `requirements.txt`, an installation cannot be guaranteed to have the same version with the previous, tested installation. Furthermore, most of the time we need to manually add the dependencies to the `requirements.txt` file.
+
+[**Pipenv**](http://pipenv.readthedocs.io/en/latest/) is a packaging tool that aims to solve that and several other problems. It automatically stores the dependencies in a `Pipefile` after installing a package with `pipenv install`. It has a `Pipfile.lock`, which is used to produce deterministic installation. It also able to separate development packages from the production packages.
+
+First, install `pipenv` with `pip install pipenv`.
+
+Here's a cheat sheet of the `pipenv` as a dependency manager:
+
+* Install a package: `pipenv install packagename`.
+* Install a development package: `pipenv install --dev devpackagename`
+* Install from a git repository `pipenv install git+https://bitbucket.org/verysmartdonkey/nodeflux-logger-python#egg=logger`
+* Install production dependencies from the `Pipfile`: `pipenv install`
+* To install dependencies from the `Pipfile` along with the development packages: `pipenv install --dev`
 
 ### Setup Script
 
@@ -67,8 +100,8 @@ You **must** use `pylint` to analize your code.
 
 To make the most of pylint, use an extension that supports pylint on your text editor/IDE:
 
-- Visual Studio Code: [Python Extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
-- Sublime Text: [Anaconda](https://packagecontrol.io/packages/Anaconda)
+* Visual Studio Code: [Python Extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
+* Sublime Text: [Anaconda](https://packagecontrol.io/packages/Anaconda)
 
 #### Pros
 
@@ -120,13 +153,13 @@ The best practice is to use virtual environment for each project. It allows proj
 
 #### Pros
 
-- Projects are isolated in their virtual environments.
-- Each virtual environment has their own `site-packages`.
-- Does not requires `sudo` to install package.
+* Projects are isolated in their virtual environments.
+* Each virtual environment has their own `site-packages`.
+* Does not requires `sudo` to install package.
 
 #### Cons
 
-- Required more disk space, for a package could be installed in more than one place at a time.
+* Required more disk space, for a package could be installed in more than one place at a time.
 
 ### Directory Structure
 
