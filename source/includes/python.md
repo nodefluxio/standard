@@ -1,6 +1,6 @@
 # Python
 
-## Language Rules
+## Development Workflow
 
 ### Dependency Management
 
@@ -38,17 +38,24 @@ $ pipenv install
 
 The most common dependency management for python is the use of `requirements.txt` file, which can be installed with `pip install -r requirements.txt`. Unfortunately, this simple solution is prone to many problems. Installation with `requirements.txt` is non deterministic. Depending on the content of the `requirements.txt`, an installation cannot be guaranteed to have the same version with the previous, tested installation. Furthermore, most of the time we need to manually add the dependencies to the `requirements.txt` file.
 
-[**Pipenv**](http://pipenv.readthedocs.io/en/latest/) is a packaging tool that aims to solve that and several other problems. It automatically stores the dependencies in a `Pipefile` after installing a package with `pipenv install`. It has a `Pipfile.lock`, which is used to produce deterministic installation. It also able to separate development packages from the production packages.
+Installing packages into global `site-packages` is not a good practice. Some common problem we face is version clashing and permission (requires `sudo` to install a package). The best practice is to use virtual environment for each project. It allows a project to isolate itself from other projects and use different version of dependency.
+
+[**Pipenv**](http://pipenv.readthedocs.io/en/latest/) is a packaging tool that aims to solve those problems. It automatically creates and manages a virtual environment for your project, as well as adds or removes packages to a `Pipefile` as you install or uninstall packages. It has a `Pipfile.lock`, which is used to produce deterministic installation. It also able to separate development packages from the production packages.
 
 First, install `pipenv` with `pip install pipenv`.
 
 Here's a cheat sheet of the `pipenv` as a dependency manager:
 
-* Install a package: `pipenv install packagename`.
-* Install a development package: `pipenv install --dev devpackagename`
+* Specify Python version for the virtual environment: `pipenv --python 3.6`. If not specified, it will use the version of the default Python.
+* Install a package: `pipenv install <packagename>`.
+* Install a development package: `pipenv install --dev <devpackagename>`
 * Install from a git repository `pipenv install git+https://bitbucket.org/verysmartdonkey/nodeflux-logger-python#egg=logger`
 * Install production dependencies from the `Pipfile`: `pipenv install`
 * To install dependencies from the `Pipfile` along with the development packages: `pipenv install --dev`
+* Run a command from the virtual environment: `pipenv run <command>`
+* Spawn a shell with the virtual environment activated: `pipenv shell`
+
+You **must** use `pipenv` to manage your dependencies and virtual environment, and you **must** separate production and development packages.
 
 ### Setup Script
 
@@ -85,6 +92,8 @@ The most common way to install python package is `pip`. To make `pip` works, we 
 After the setup script is ready, we can install the package with `pip install .` (or `pip install -e .` to make it editable while developing the package).
 
 You **must** to create a setup script for every package that designed to be reusable. An installation with `pip install` **should** installs all package components, including dependencies, extensions and package data.
+
+## Language Rules
 
 ### Lint
 
@@ -128,38 +137,6 @@ print('Hello, World')
 ## Style Rules
 
 ## Best Practice
-
-### Virtual Environment
-
-> Creating a virtual environment with `conda`.
-
-```shell
-conda create -n LPR python=3.6
-source activate LPR
-```
-
-> Creating a virtual environment with `virtualenvwrapper`.
-
-```shell
-export WORKON_HOME=~/.envs
-mkdir -p $WORKON_HOME
-source /usr/local/bin/virtualenvwrapper.sh
-mkvirtualenv LPR
-```
-
-Installing packages into global `site-packages` is not a good practice. Some common problem we face is version clashing and permission (requires `sudo` to install a package).
-
-The best practice is to use virtual environment for each project. It allows projects to use different version of dependencies. We could also install the package without `sudo`.
-
-#### Pros
-
-* Projects are isolated in their virtual environments.
-* Each virtual environment has their own `site-packages`.
-* Does not requires `sudo` to install package.
-
-#### Cons
-
-* Required more disk space, for a package could be installed in more than one place at a time.
 
 ### Directory Structure
 
