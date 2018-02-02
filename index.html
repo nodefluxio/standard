@@ -220,6 +220,34 @@
           </li>
           <li>
             <a href="#git" class="toc-h1 toc-link" data-title="Git">Git</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#commit-flow" class="toc-h2 toc-link" data-title="Commit Flow">Commit Flow</a>
+                  </li>
+                  <li>
+                    <a href="#feature-branch-management" class="toc-h2 toc-link" data-title="Feature Branch Management">Feature Branch Management</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#with-jira" class="toc-h3 toc-link" data-title="Git">with JIRA</a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li>
+                    <a href="#commit-message-rule" class="toc-h2 toc-link" data-title="Commit Message Rule">Commit Message Rule</a>
+                  </li>
+                  <li>
+                    <a href="#pull-request-management" class="toc-h2 toc-link" data-title="Pull Request Management">Pull Request Management</a>
+                  </li>
+                  <li>
+                    <a href="#release-branch-management" class="toc-h2 toc-link" data-title="Release Branch Management">Release Branch Management</a>
+                  </li>
+                  <li>
+                    <a href="#rule-access-control" class="toc-h2 toc-link" data-title="Rule Access Control">Rule Access Control</a>
+                  </li>
+                  <li>
+                    <a href="#other-technique-for-git" class="toc-h2 toc-link" data-title="Other Technique for git">Other Technique for git</a>
+                  </li>
+              </ul>
           </li>
           <li>
             <a href="#python" class="toc-h1 toc-link" data-title="Python">Python</a>
@@ -272,7 +300,88 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='introduction'>Introduction</h1><h1 id='git'>Git</h1><h1 id='python'>Python</h1><h2 id='development-workflow'>Development Workflow</h2><h3 id='directory-structure'>Directory Structure</h3>
+        <h1 id='introduction'>Introduction</h1><h1 id='git'>Git</h1><h2 id='commit-flow'>Commit Flow</h2>
+<p><img src="images/git/git_flow.png" title="Commit Flow" alt="alt text" />
+<br/><br/>
+At nodeflux we have 2 branch default branch master and development. <br/>
+Feature branch if we want to add new feature.<br/>
+Release branch create when master already full tested. <br/>
+Hotfix branch create when fixing bug on master (MINOR Version ex: 1.1.1 -&gt; 1.1.2)</p>
+
+<p>About Versioning:
+https://semver.org/</p>
+<h2 id='feature-branch-management'>Feature Branch Management</h2><h3 id='with-jira'>with JIRA</h3>
+<p>How To Create Feature Branch With Jira :</p>
+
+<ul>
+<li>Step 1 -&gt; select create branch from jira</li>
+<li>Step 2 -&gt;branch name naming convention follow the jira made <br/>
+(<em>Project Name</em>-<em>Title Name</em> ex: SD-711-fr-show-page-without-cctv-streame)<br/>
+note: please choose branch from development</li>
+<li>Step 3 -&gt; Terminal</li>
+</ul>
+
+<blockquote>
+<p>Access Feature Branch</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>git fetch --all
+git checkout &lt;branchname-createdfromjira&gt;
+</code></pre><h2 id='commit-message-rule'>Commit Message Rule</h2><h4 id='rule-for-commit-message'>Rule for commit message:</h4>
+<ol>
+<li>Please use git commit without -m</li>
+<li>Separate Title from body with a blank line</li>
+<li>Limit the subject line to 50 characters</li>
+<li>Capitalize the subject line</li>
+<li>Do not end the subject line with a period</li>
+<li>Use the imperative mood in the subject line</li>
+<li>Wrap the body at 72 characters</li>
+<li>Use the body to explain what and why
+for detail: https://chris.beams.io/posts/git-commit/</li>
+</ol>
+<h4 id='commit-message-template'>commit message template</h4><pre class="highlight shell tab-shell"><code>
+<span class="c"># &lt;type&gt;: (If applied, this commit will...) &lt;subject&gt; (Max 50 char)</span>
+<span class="c"># |&lt;----  Using a Maximum Of 50 Characters  ----&gt;|</span>
+
+
+<span class="c"># Explain why this change is being made</span>
+<span class="c"># |&lt;----   Try To Limit Each Line to a Maximum Of 72 Characters   ----&gt;|</span>
+
+<span class="c"># Provide links or keys to any relevant tickets, articles or other resources</span>
+<span class="c"># Example: Github issue #23</span>
+
+<span class="c"># --- COMMIT END ---</span>
+<span class="c"># Type can be</span>
+<span class="c">#    feature  (new feature)</span>
+<span class="c">#    fix      (bug fix)</span>
+<span class="c">#    refactor (refactoring production code)</span>
+<span class="c">#    style    (formatting, missing semi colons, etc; no code change)</span>
+<span class="c">#    docs     (changes to documentation)</span>
+<span class="c">#    test     (adding or refactoring tests; no production code change)</span>
+<span class="c">#    chore    (updating grunt tasks etc; no production code change)</span>
+<span class="c"># --------------------</span>
+<span class="c"># Remember to</span>
+<span class="c">#    Capitalize the subject line</span>
+<span class="c">#    Use the imperative mood in the subject line</span>
+<span class="c">#    Do not end the subject line with a period</span>
+<span class="c">#    Separate subject from body with a blank line</span>
+<span class="c">#    Use the body to explain what and why vs. how</span>
+<span class="c">#    Can use multiple lines with "-" for bullet points in body</span>
+<span class="c"># --------------------</span>
+<span class="c"># For more information about this template, check out</span>
+<span class="c"># https://gist.github.com/adeekshith/cd4c95a064977cdc6c50</span>
+</code></pre>
+<p>To apply the template,</p>
+
+<p>Save the above file to your local machine and use</p>
+
+<p>git config --global commit.template &lt;.git-commit-template.txt file path&gt;</p>
+
+<p>For example, if you saved it to your home folder, try:</p>
+
+<p>git config --global commit.template ~/.git-commit-template.txt</p>
+<h2 id='pull-request-management'>Pull Request Management</h2><h2 id='release-branch-management'>Release Branch Management</h2><h2 id='rule-access-control'>Rule Access Control</h2><h2 id='other-technique-for-git'>Other Technique for git</h2><h4 id='for-revert-the-commit-but-not-at-remote'>for revert the commit but not at remote</h4><pre class="highlight shell tab-shell"><code><span class="gp">$ </span>git reset --soft HEAD~ <span class="c"># back to before commit</span>
+<span class="gp">$ </span>git reset HEAD . <span class="c"># back the before git add / before phase ready to commit</span>
+</code></pre><h1 id='python'>Python</h1><h2 id='development-workflow'>Development Workflow</h2><h3 id='directory-structure'>Directory Structure</h3>
 <blockquote>
 <p>Example of a package structure.</p>
 </blockquote>
