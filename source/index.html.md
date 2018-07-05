@@ -9,6 +9,7 @@ includes:
   - python
   - cpp
   - javascript
+  - api
 
 search: true
 ---
