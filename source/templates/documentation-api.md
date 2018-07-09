@@ -20,19 +20,22 @@ Response data are sent as `application/json`.
 
 ```json
 Response 200 OK
-[
-    {
-        "analytic_stream_url":"http://100.10.10.1/123-res.mjpeg",
-        "stream_name":"Gelora Bung Karno",
-        "location":{"lat":"1231","long":"-101.1321"}
-    },
-    {
-        "analytic_stream_url":"http://100.10.10.1/121-res.mjpeg",
-        "stream_name":"Gelora Bung Karno",
-        "location":{"lat":"1231","long":"-101.1321"}
-    },
-    ...
-]
+{
+    "ok":true,
+    "streamers":[
+        {
+            "analytic_stream_url":"http://100.10.10.1/123-res.mjpeg",
+            "stream_name":"Gelora Bung Karno",
+            "location":{"lat":"1231","long":"-101.1321"}
+        },
+        {
+            "analytic_stream_url":"http://100.10.10.1/121-res.mjpeg",
+            "stream_name":"Gelora Bung Karno",
+            "location":{"lat":"1231","long":"-101.1321"}
+        },
+        ...
+    ]
+}
 ```
 
 #### Error Response
@@ -64,102 +67,82 @@ Response data are sent as `application/json`.
 
 #### Success Response
 
-***GET*** {HOST}/api/v1/recent-recognitions/face/known
+**_GET_** {HOST}/api/v1/recent-recognitions/face/known
 
 ```json
 Response 200 OK
-[
-    {
-        "thumbnail":"http://xxx.xxx.xxx/thumbnail.jpg",
-        "name":"user1",
-        "location_name":"Location 1",
-        "location_stream":{"lat":"1231","long":"-101.1321"},
-        "timestamp":"2018-01-11 14:44:55"
-    },
-    {
-        "thumbnail":"http://xxx.xxx.xxx/thumbnail.jpg",
-        "name":"user2",
-        "location_name":"Location 2",
-        "location_stream":{"lat":"1231","long":"-101.1321"},
-        "timestamp":"2018-01-11 14:44:55"
-    },
-    ...
-]
+{
+    "ok":true,
+    "cctvs":[
+        {
+            "thumbnail":"http://xxx.xxx.xxx/thumbnail.jpg",
+            "name":"user1",
+            "location_name":"Location 1",
+            "location_stream":{"lat":"1231","long":"-101.1321"},
+            "timestamp":"2018-01-11 14:44:55"
+        },
+        {
+            "thumbnail":"http://xxx.xxx.xxx/thumbnail.jpg",
+            "name":"user2",
+            "location_name":"Location 2",
+            "location_stream":{"lat":"1231","long":"-101.1321"},
+            "timestamp":"2018-01-11 14:44:55"
+        },
+        ...
+    ]
+}
 ```
 
-***GET*** {HOST}/api/v1/recent-recognitions/face/unknown
+**_GET_** {HOST}/api/v1/recent-recognitions/face/unknown
 
 ```json
 Response 200 OK
-[
-    {
-        "thumbnail":"http://xxx.xxx.xxx/thumbnail.jpg",
-        "location_name":"Location 1",
-        "location_stream":{"lat":"1231","long":"-101.1321"},
-        "timestamp":"2018-01-11 14:44:55"
-    },
-    {
-        "thumbnail":"http://xxx.xxx.xxx/thumbnail.jpg",
-        "location_name":"Location 2",
-        "location_stream":{"lat":"1231","long":"-101.1321"},
-        "timestamp":"2018-01-11 14:44:55"
-    },
-    ...
-]
+{
+    "ok":true,
+    "cctvs":[
+        {
+            "thumbnail":"http://xxx.xxx.xxx/thumbnail.jpg",
+            "name":"user1",
+            "location_name":"Location 1",
+            "location_stream":{"lat":"1231","long":"-101.1321"},
+            "timestamp":"2018-01-11 14:44:55"
+        },
+        {
+            "thumbnail":"http://xxx.xxx.xxx/thumbnail.jpg",
+            "name":"user2",
+            "location_name":"Location 2",
+            "location_stream":{"lat":"1231","long":"-101.1321"},
+            "timestamp":"2018-01-11 14:44:55"
+        },
+        ...
+    ]
+}
 ```
 
-***GET*** {HOST}/api/v1/recent-recognitions/plate/known
+**_GET_** {HOST}/api/v1/recent-recognitions/plate/known
 
 ```json
 Response 200 OK
-[
-    {
-        "thumbnail":"http://xxx.xxx.xxx/thumbnail.jpg",
-        "name":"B1921JK",
-        "location_name":"Location 1",
-        "location_stream":{"lat":"1231","long":"-101.1321"},
-        "timestamp":"2018-01-11 14:44:55",
-        "attributes":{
-            "nik":"13812732789",
-            "name":"John Doe"
-        }
-    },
-    {
-        "thumbnail":"http://xxx.xxx.xxx/thumbnail.jpg",
-        "name":"B7289BOJ",        
-        "location_name":"Location 2",
-        "location_stream":{"lat":"1231","long":"-101.1321"},
-        "timestamp":"2018-01-11 14:44:55",
-        "attributes":{
-            "nik":"138127327891",
-            "name":"John DoeE"
-        }
-    },
-    ...
-]
-```
-
-***GET*** {HOST}/api/v1/recent-recognitions/plate/unknown
-
-```json
-Response 200 OK
-[
-    {
-        "thumbnail":"http://xxx.xxx.xxx/thumbnail.jpg",
-        "name":"B1921JK",       
-        "location_name":"Location 1",
-        "location_stream":{"lat":"1231","long":"-101.1321"},
-        "timestamp":"2018-01-11 14:44:55"
-    },
-    {
-        "thumbnail":"http://xxx.xxx.xxx/thumbnail.jpg",
-        "name":"B1921JK",
-        "location_name":"Location 2",
-        "location_stream":{"lat":"1231","long":"-101.1321"},
-        "timestamp":"2018-01-11 14:44:55"
-    },
-    ...
-]
+{
+    "ok":true,
+    "cctvs":[
+        {
+            "thumbnail":"http://xxx.xxx.xxx/thumbnail.jpg",
+            "name":"user1",
+            "location_name":"Location 1",
+            "location_stream":{"lat":"1231","long":"-101.1321"},
+            "timestamp":"2018-01-11 14:44:55"
+        },
+        {
+            "thumbnail":"http://xxx.xxx.xxx/thumbnail.jpg",
+            "name":"user2",
+            "location_name":"Location 2",
+            "location_stream":{"lat":"1231","long":"-101.1321"},
+            "timestamp":"2018-01-11 14:44:55"
+        },
+        ...
+    ]
+}
 ```
 
 #### Error Response
@@ -169,7 +152,11 @@ usually :type-recognition or :type-data same with predefined
 
 ```json
 {
-  "message": "something wrong"
+  "ok": false,
+  "error": {
+    "code": "not-valid",
+    "message": "something wrong"
+  }
 }
 ```
 
@@ -178,7 +165,10 @@ token already expired or token is false
 
 ```json
 {
-  "message": "Not Authorized"
+  "error": {
+    "code": "not-authorized",
+    "message": "user not authorized"
+  }
 }
 ```
 
